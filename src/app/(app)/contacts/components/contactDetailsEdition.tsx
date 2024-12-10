@@ -6,7 +6,7 @@ const ContactDetailsEdition: React.FC = () => {
     const { register } = useFormContext();
     return (
         <div className="p-4 bg-white rounded shadow">
-            <h3 className="font-bold text-blue-600">Contact Details</h3>
+            <h3 className="font-bold">Contact Details</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-5">
                 <div className="flex flex-col">
                     <label className="mb-2 text-slate-500">First Name</label>

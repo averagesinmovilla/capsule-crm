@@ -1,8 +1,8 @@
 import * as z from "zod";
 import { Image } from "@/types/image.types";
 
-export const propertySchema = {
-    reference: z.string().nonempty({ message: "La referencia no puede estar vacía" }),
+export const propertySchema = z.object({
+    reference: z.string().nonempty({ message: "The reference cannot be empty" }),
     type: z.enum(["flat", "house", "duplex", "room", "garage", "country_house", "other"]),
     title: z.string().optional(),
     description: z.string().optional(),
@@ -10,13 +10,13 @@ export const propertySchema = {
     street_number: z.string().optional(),
     floor: z.string().optional(),
     door: z.string().optional(),
-    city: z.string().nonempty({ message: "La ciudad no puede estar vacía" }),
+    city: z.string().nonempty({ message: "The city cannot be empty" }),
+    country_id: z.string().nonempty({ message: "The country cannot be empty" }),
     state: z.string().nonempty({ message: "El estado no puede estar vacío" }),
-    country_id: z.string().nonempty({ message: "El país no puede estar vacío" }),
     zip_code: z.string().optional(),
     zone: z.string().optional(),
-    latitude: z.coerce.number().min(-90).max(90, "Latitud inválida"),
-    longitude: z.coerce.number().min(-180).max(180, "Longitud inválida"),
+    latitude: z.coerce.number().min(-90).max(90, "Invalid latitude"),
+    longitude: z.coerce.number().min(-180).max(180, "Invalid longitude"),
     sale_price: z.coerce.number().optional(),
     rent_price: z.coerce.number().optional(),
     transfer_price: z.coerce.number().optional(),
@@ -34,7 +34,7 @@ export const propertySchema = {
     contact_id: z.coerce.number(),
     user_id: z.coerce.number(),
     image: z.array(z.string()).optional(),
-};
+});
 
 export const getDefaultValues = (data: Property) => ({
     reference: data.reference || "",

@@ -11,7 +11,7 @@ const MapDetails = dynamic(() => import('./map/mapDetails'), {
 });
 
 const LocationDetails: React.FC = () => {
-    const { register, formState: { errors }, watch, setValue, getValues } = useFormContext();
+    const { register, watch, setValue, getValues, formState: { errors } } = useFormContext();
     const [search, setSearch] = useState("");
 
     const handleBlur = () => {
@@ -47,10 +47,17 @@ const LocationDetails: React.FC = () => {
                         </label>
                         <Input
                             type="text"
-                            className="border p-1 rounded"
+                            className={`border p-1 rounded w-full ${
+                                errors.city ? 'border-red-500' : 'border-gray-300'
+                            } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500`}
                             {...register("city")}
                             onBlur={handleBlur}
                         />
+                        {errors.city && (
+                            <p className="mt-1 text-sm text-red-600">
+                                {`${errors.city.message}`}
+                            </p>
+                        )}
                     </div>
                     <div className="flex flex-col md:mr-10 mb-5">
                         <label className="mb-2 flex items-center text-slate-500">
@@ -92,16 +99,6 @@ const LocationDetails: React.FC = () => {
                             type="text"
                             className="border p-1 rounded"
                             {...register("door")}
-                        />
-                    </div>
-                    <div className="flex flex-col md:mr-10 mb-5">
-                        <label className="mb-2 flex items-center text-slate-500">
-                            State:
-                        </label>
-                        <Input
-                            type="text"
-                            className="border p-1 rounded"
-                            {...register("state")}
                         />
                     </div>
                     <div className="flex flex-col md:mr-10 mb-5">

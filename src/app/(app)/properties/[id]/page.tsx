@@ -22,6 +22,7 @@ const PropertyComponent = () => {
                 try {
                     const propertyService = new PropertyService();
                     const data: Property = await propertyService.getProperty(Number(id));
+                    data.is_available = !!data.is_available;
                     setProperty(data);
                 } catch (error) {
                     console.error('Error fetching data:', error);

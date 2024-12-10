@@ -24,7 +24,7 @@ type GeneralizedPieChartType = {
     valueName?: string;
     chartTitle?: string;
     chartDescription?: string;
-    data: [Record<string, number>];
+    data: Record<string, number>;
 }
 
 
@@ -48,7 +48,7 @@ export function GeneralizedPieChart({
 
         setChartData(transformedData)
         setTotalValues(
-            transformedData.reduce((acc, curr) => acc + curr[valueName], 0)
+            transformedData.reduce((acc, curr) => acc + (curr[valueName] as number), 0)
         )
     }, [data, keyName, valueName, colorGenerator])
 

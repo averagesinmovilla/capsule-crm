@@ -42,7 +42,7 @@ export function GeneralizedBarChart({
     React.useEffect(() => {
         const transformedData = Object.keys(data).map((key, index) => ({
             [keyName]: key,
-            [valueName]: data[key],
+            [valueName]: data[parseInt(key)],
             fill: colorGenerator(index),
         }));
 

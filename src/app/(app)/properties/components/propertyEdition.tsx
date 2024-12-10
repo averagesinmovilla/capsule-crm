@@ -12,7 +12,6 @@ import { useToast } from '@/hooks/use-toast';
 import GalleryPhotos from '@/app/(app)/properties/components/galleryPhotos';
 import AgentEdition from './agentEdition';
 import PricesEdition from './pricesEdition';
-import LocationEdition from '@/app/(app)/properties/components/locationEdition';
 import PropertyCharacteristicsEdition from './propertyCharacteristicsEdition';
 import PropertyDescriptionsEdition from './propertyDescriptionsEdition';
 import ImageUpload from '@/components/ImageUpload';
@@ -29,6 +28,7 @@ import { uploadedFileType } from '@/types/image-upload.types';
 import {useRouter} from "next/navigation";
 import AlertDialog from "@/components/shared/alertDialog";
 import PropertyContactEdit from "@/app/(app)/properties/components/propertyContactEdit";
+import LocationEdition from "@/app/(app)/properties/components/locationEdition";
 
 
 interface PropertyEditionProps {
@@ -38,7 +38,7 @@ interface PropertyEditionProps {
     isNew?: boolean;
 }
 
-const formSchema = z.object(propertySchema);
+const formSchema = propertySchema;
 
 const PropertyEdition: React.FC<PropertyEditionProps> = ({ editFunction, data, rechargeFunctionProperty, isNew }) => {
     const { toast } = useToast();
@@ -46,32 +46,28 @@ const PropertyEdition: React.FC<PropertyEditionProps> = ({ editFunction, data, r
     const propertyService = new PropertyService();
     const methods = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: getDefaultValues(data),
+        defaultValues: getDefaultValues(data)
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         methods.reset(getDefaultValues(data));
-    }, [data, methods]);
+    }, [data]);
 
     const handleSubmit = async (values: z.infer<typeof formSchema>) => {
         setIsSubmitting(true);
         try {
-            const { image, operation, ...valuesWithoutPhotos } = values;
-            const updatedProperty: Property = {
-                id: data.id,
-                operation: JSON.stringify({"operations" : [operation]}),
-                ...valuesWithoutPhotos,
-            };
-
+            const { image, ...valuesWithoutPhotos} = values;
             if (isNew) {
-                const {id, ...updatedPropertyWithoutId} = updatedProperty;
-                const {property} = await propertyService.save(updatedPropertyWithoutId);
-
+                const {property} = await propertyService.save(valuesWithoutPhotos);
                 router.push(`/properties/${property.id}`);
                 return;
             } else {
+                const updatedProperty: Property = {
+                    id: data.id,
+                    ...valuesWithoutPhotos
+                }
                 const {property} = await propertyService.update(data.id, updatedProperty);
                 property.image = data.image;
                 if (typeof(rechargeFunctionProperty) == "function") {
@@ -223,6 +219,7 @@ const PropertyEdition: React.FC<PropertyEditionProps> = ({ editFunction, data, r
                                 <PricesEdition/>
                             </div>
                         </div>
+                        <LocationEdition/>
                         <PropertyCharacteristicsEdition/>
                         <PropertyDescriptionsEdition/>
                         <PropertyContactEdit/>

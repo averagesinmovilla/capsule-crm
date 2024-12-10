@@ -23,16 +23,20 @@ const PropertyContactEdit = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [rowSelection, setSelectedRowsChange] = useState<RowSelectionState>({});
 
-    console.log(rowSelection);
     const handlerSelectContact = () => {
-        setIsModalOpen(false); // Cierra el modal al seleccionar el contacto
+        // Cierra el modal al seleccionar el contacto
+        setIsModalOpen(false);
     }
 
     useEffect(() => {
         if(Object.keys(rowSelection).length > 0){
+            // @ts-ignore
             setValue("full_name", rowSelection[0].name);
+            // @ts-ignore
             setValue("email", rowSelection[0].email);
+            // @ts-ignore
             setValue("phone", rowSelection[0].phone);
+            // @ts-ignore
             setValue("id", rowSelection[0].id);
             setIsModalOpen(false);
         }

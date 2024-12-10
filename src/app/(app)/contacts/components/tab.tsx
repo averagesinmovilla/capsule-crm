@@ -24,7 +24,7 @@ interface TabContactProps {
 const TabContact: React.FC<TabContactProps> = ({ contact }) => {
     const renderField = (label: string, value: string | number | null | undefined) => (
         <p className="mr-20">
-            <span className="font-semibold">{label}:</span> {value || '-'}
+            <span className="font-semibold">{label == "" ? "" : label+":"}</span> {value || '-'}
         </p>
     );
 
@@ -45,8 +45,8 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                             <div className="grid grid-cols-1 gap-4">
                                 {/* Contact Details */}
                                 <div className="p-4 bg-white rounded shadow">
-                                    <h3 className="font-bold text-blue-600">Contact Details</h3>
-                                    <div className="flex flex-wrap min-h-[80px] p-5">
+                                    <h3 className="font-bold">Contact Details</h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-5 min-h-[80px]">
                                         {renderField('Email', contact.email)}
                                         {renderField('Alternate Email', contact.alternate_email)}
                                         {renderField('Phone', contact.phone)}
@@ -54,40 +54,43 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                                         {renderField('Preferred Contact Method', contact.contact_medium)}
                                         {renderField('Language', contact.language)}
                                     </div>
+
                                 </div>
 
                                 {/* Personal Information */}
                                 <div className="p-4 bg-white rounded shadow">
-                                    <h3 className="font-bold text-blue-600">Personal Information</h3>
-                                    <div className="flex flex-wrap min-h-[80px] p-5">
+                                    <h3 className="font-bold">Personal Information</h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-5 min-h-[80px]">
                                         {renderField('NIF', contact.nif)}
                                         {renderField('Date of Birth', contact.birthday)}
                                         {renderField('Gender', contact.gender)}
                                     </div>
+
                                 </div>
 
                                 {/* Profession */}
                                 <div className="p-4 bg-white rounded shadow">
-                                    <h3 className="font-bold text-blue-600">Profession</h3>
-                                    <div className="flex flex-wrap min-h-[80px] p-5">
+                                    <h3 className="font-bold">Profession</h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 min-h-[80px]">
                                         {renderField('Profession', contact.profession)}
                                         {renderField('Company', contact.company)}
                                     </div>
+
                                 </div>
 
                                 {/* Notes */}
                                 <div className="p-4 bg-white rounded shadow">
-                                    <h3 className="font-bold text-blue-600">Notes</h3>
+                                <h3 className="font-bold">Notes</h3>
                                     <div className="flex flex-wrap min-h-[80px] p-5">
-                                        {renderField('Notes', contact.notes)}
+                                        {renderField('', contact.notes)}
                                     </div>
                                 </div>
 
                                 {/* GDPR */}
                                 <div className="p-4 bg-white rounded shadow">
-                                    <h3 className="font-bold text-blue-600">GDPR</h3>
+                                    <h3 className="font-bold">RGPD</h3>
                                     <div className="flex flex-wrap min-h-[200px] p-5">
-                                        {renderField('GDPR', contact.rgpd)}
+                                        {renderField('', contact.rgpd)}
                                     </div>
                                 </div>
                             </div>

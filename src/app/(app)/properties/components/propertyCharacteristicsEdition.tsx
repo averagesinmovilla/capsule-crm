@@ -4,14 +4,16 @@ import { Input } from '@/components/ui/input';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 
 const PropertyCharacteristicsEdition = () => {
-    const { register, setValue, getValues } = useFormContext();
+    const { register, setValue, getValues, formState: { errors } } = useFormContext();
     const [selectedType, setSelectedType] = useState(getValues("type")); // Estado local para el valor del select
+    const [selectedState, setSelectedState] = useState(getValues("type")); // Estado local para el valor del select
 
 
     // Manejar cambios de valor en el select
-    const handleSelectChange = (value: string) => {
-        setSelectedType(value);  // Actualizar el estado local
-        setValue("type", value); // Actualizar el valor en el hook form
+    const handleSelectChange = (name: string, value: string) => {
+        setValue(name, value); // Actualiza el valor en React Hook Form
+        if (name === "type") setSelectedType(value);
+        if (name === "state") setSelectedState(value);
     };
 
     return (
@@ -27,14 +29,29 @@ const PropertyCharacteristicsEdition = () => {
                         className="border p-1 rounded w-full"
                         {...register("reference")}
                     />
+                    {errors.reference && (
+                        <p className="mt-1 text-sm text-red-600">
+                            {`${errors.reference.message}`}
+                        </p>
+                    )}
+                </div>
+                <div className="flex flex-col sm:mr-10 mb-2">
+                    <label className="mb-2 flex items-center text-slate-500">
+                        State:
+                    </label>
+                    <Input
+                        type="text"
+                        className="border p-1 rounded w-full"
+                        {...register("state")}
+                    />
                 </div>
                 <div className="flex flex-col sm:mr-10 mb-2 relative">
                     <label className="mb-2 text-slate-500">
                         Type of Property:
                     </label>
                     <Select
-                        onValueChange={handleSelectChange}
-                        defaultValue={selectedType} // Cargar valor predeterminado
+                        onValueChange={(value: string) => handleSelectChange("type", value)}
+                        value={selectedType}
                     >
                         <SelectTrigger>
                             <SelectValue placeholder="Select Property Type"/>
