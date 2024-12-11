@@ -5,7 +5,7 @@ const RgpdEdit: React.FC = () => {
     const { register } = useFormContext();
 
     return (
-        <div className="p-4 bg-white rounded shadow">
+        <div className="p-4 border rounded shadow">
             <h3 className="font-bold">RGPD</h3>
             <div className="grid grid-cols-1 gap-4 p-5">
                 <div className="flex flex-col">

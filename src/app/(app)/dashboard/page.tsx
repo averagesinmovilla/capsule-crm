@@ -19,7 +19,7 @@ function getTasks() {
 const Dashboard = () => {
     return (
         <div className="w-full gap-4 p-4 lg:gap-6 lg:p-6">
-            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-10">
+            <div className=" overflow-hidden shadow-sm sm:rounded-lg p-10">
                 <div className='flex flex-col gap-10 justify-center items-center'>
                     <div >
                         <div className="text-2xl font-bold text-center mb-5">Properties</div>

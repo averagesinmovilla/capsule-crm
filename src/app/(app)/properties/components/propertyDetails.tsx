@@ -24,15 +24,15 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
             </div>
             <LocationDetails data={property}/>
             <div className="flex mt-4 mb-4 text-sm text-slate-500">
-                <div className="flex items-center mr-4">
+                <div className="flex items-center mr-4 text-lg">
                     <IoBedOutline className="ml-2 mr-1 text-green-500"/>
                     <span>{property.bedrooms} Beds</span>
                 </div>
-                <div className="flex items-center mr-4">
+                <div className="flex items-center mr-4 text-lg">
                     <PiBathtubLight className="ml-2 mr-1 text-green-500"/>
                     <span>{property.bathrooms} Baths</span>
                 </div>
-                <div className="flex items-center mr-4">
+                <div className="flex items-center mr-4 text-lg">
                     <BiSolidCarGarage className="ml-2 mr-1 text-green-500"/>
                     <span>{property.garage_spaces} Parks</span>
                 </div>

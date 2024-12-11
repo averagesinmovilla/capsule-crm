@@ -35,7 +35,7 @@ interface ContactEditionProps {
     isNew?: boolean;
 }
 
-const formSchema = z.object(contactSchema);
+const formSchema = contactSchema;
 
 const ContactEdition: React.FC<ContactEditionProps> = ({editFunction, data, isNew = false}) => {
     const {toast} = useToast();
@@ -214,8 +214,8 @@ const ContactEdition: React.FC<ContactEditionProps> = ({editFunction, data, isNe
                                     }
                                 </div>
                             </div>
-                            <div className="row-span-2 col-span-3 border bg-muted/40 p-5">
-                                <div className="grid grid-cols-1 gap-4 overflow-auto h-[calc(100vh-200px)]">
+                            <div className="row-span-2 col-span-3 p-5">
+                                <div className="grid grid-cols-1 gap-4 overflow-auto h-[calc(100vh-200px)] pr-5">
                                     <ContactDetailsEdition />
                                     <PersonalInformationEdit />
                                     <ProfessionEdit />

@@ -29,6 +29,7 @@ import {useRouter} from "next/navigation";
 import AlertDialog from "@/components/shared/alertDialog";
 import PropertyContactEdit from "@/app/(app)/properties/components/propertyContactEdit";
 import LocationEdition from "@/app/(app)/properties/components/locationEdition";
+import {Contact} from "@/types/contact.types";
 
 
 interface PropertyEditionProps {
@@ -58,15 +59,14 @@ const PropertyEdition: React.FC<PropertyEditionProps> = ({ editFunction, data, r
     const handleSubmit = async (values: z.infer<typeof formSchema>) => {
         setIsSubmitting(true);
         try {
-            const { image, ...valuesWithoutPhotos} = values;
             if (isNew) {
-                const {property} = await propertyService.save(valuesWithoutPhotos);
+                const {property} = await propertyService.save(values);
                 router.push(`/properties/${property.id}`);
                 return;
             } else {
-                const updatedProperty: Property = {
+                const updatedProperty = {
                     id: data.id,
-                    ...valuesWithoutPhotos
+                    ...values
                 }
                 const {property} = await propertyService.update(data.id, updatedProperty);
                 property.image = data.image;

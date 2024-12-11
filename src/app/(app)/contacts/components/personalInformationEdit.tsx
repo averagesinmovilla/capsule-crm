@@ -24,7 +24,7 @@ const PersonalInformationEdition: React.FC = () => {
     };
 
     return (
-        <div className="p-4 bg-white rounded shadow">
+        <div className="p-4 border rounded shadow">
             <h3 className="font-bold">Personal Information</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-5">
                 <div className="flex flex-col">

@@ -46,7 +46,7 @@ const ContactView: React.FC<ContactViewProps> = ({ editFunction, data }) => {
                         </div>
                     </div>
                 </div>
-                <div className="row-span-2 col-span-3 border bg-muted/40">
+                <div className="row-span-2 col-span-3">
                     <TabContact contact={data}/>
                 </div>
             </div>

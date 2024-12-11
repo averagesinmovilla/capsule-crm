@@ -26,6 +26,7 @@ export default function Create() {
         id: 0,
         reference: '',
         type: "house",
+        state: "new",
         status: "available",
         contact_id: 0,
         user_id: user.id,
@@ -60,7 +61,7 @@ export default function Create() {
     if (!isEditing) {
         return (
             <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <AlertDialogContent className="fixed top-1/2 left-1/2 w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-6 shadow-lg focus:outline-none">
+                <AlertDialogContent className="fixed top-1/2 left-1/2 w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md  p-6 shadow-lg focus:outline-none">
                     <AlertDialogTitle className="text-lg font-bold">
                         Do you want to cancel the current record?
                     </AlertDialogTitle>

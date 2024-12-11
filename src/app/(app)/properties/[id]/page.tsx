@@ -8,6 +8,8 @@ import { SkeletonCard } from '@/app/(app)/properties/components/skeleton';
 import PropertyView from "@/app/(app)/properties/components/propertyView";
 import PropertyEdition from "@/app/(app)/properties/components/propertyEdition";
 import { ApiParamsPropertyType, PropertyService } from '@/services/property.service';
+import {ContactService} from "@/services/contact.service";
+import {Contact} from "@/types/contact.types";
 
 const PropertyComponent = () => {
     const { id } = useParams();
@@ -36,7 +38,12 @@ const PropertyComponent = () => {
         fetchProperty();
     }, [id]);
 
-    const handlerRechargeProperty = (property: Property) => {
+    const handlerRechargeProperty = async (property: Property) => {
+        if (property.contact == null) {
+            const contactService = new ContactService();
+            const contact: Contact = await contactService.getContact(Number(property.contact_id));
+            property.contact = contact;
+        }
         setProperty(property);
     }
 
@@ -56,7 +63,7 @@ const PropertyComponent = () => {
     return (
         <div className="flex flex-1 w-full h-full">
             {isEditing ? (
-                <PropertyEdition editFunction={setIsEditing} rechargeFunctionProperty={handlerRechargeProperty}  data={property} />
+                <PropertyEdition editFunction={setIsEditing} rechargeFunctionProperty={handlerRechargeProperty} data={property} />
             ) : (
                 <PropertyView editFunction={setIsEditing} data={property}/>
             )}

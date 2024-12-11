@@ -40,9 +40,10 @@ export function GeneralizedBarChart({
 
 
     React.useEffect(() => {
+        // @ts-ignore
         const transformedData = Object.keys(data).map((key, index) => ({
             [keyName]: key,
-            [valueName]: data[parseInt(key)],
+            [valueName]: (data as Record<string, any>)[key],
             fill: colorGenerator(index),
         }));
 
@@ -68,7 +69,7 @@ export function GeneralizedBarChart({
     };
 
     return (
-        <Card className="min-w-[300px]">
+        <Card className="min-w-[500px]">
             <CardHeader className="items-center">
                 <CardTitle>{chartTitle}</CardTitle>
                 <CardDescription>{chartDescription}</CardDescription>

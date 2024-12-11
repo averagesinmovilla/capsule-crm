@@ -76,7 +76,6 @@
     }
 }
 
-
-.bg-green-capsule {
-    background-color: #5bab86;
+.shadow-inner-custom {
+    --tw-shadow: inset 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
 }

@@ -72,7 +72,7 @@ const LocationDetails: React.FC = () => {
                     </div>
                     <div className="flex flex-col md:mr-10 mb-5">
                         <label className="mb-2 flex items-center text-slate-500">
-                            Street Number:
+                            Number:
                         </label>
                         <Input
                             type="text"

@@ -6,7 +6,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/c
 const PropertyCharacteristicsEdition = () => {
     const { register, setValue, getValues, formState: { errors } } = useFormContext();
     const [selectedType, setSelectedType] = useState(getValues("type")); // Estado local para el valor del select
-    const [selectedState, setSelectedState] = useState(getValues("type")); // Estado local para el valor del select
+    const [selectedState, setSelectedState] = useState(getValues("state")); // Estado local para el valor del select
 
 
     // Manejar cambios de valor en el select
@@ -35,15 +35,30 @@ const PropertyCharacteristicsEdition = () => {
                         </p>
                     )}
                 </div>
-                <div className="flex flex-col sm:mr-10 mb-2">
+                <div className="flex flex-col sm:mr-10 mb-2 relative">
                     <label className="mb-2 flex items-center text-slate-500">
                         State:
                     </label>
-                    <Input
-                        type="text"
-                        className="border p-1 rounded w-full"
-                        {...register("state")}
-                    />
+                    <Select
+                        onValueChange={(value: string) => handleSelectChange("state", value)}
+                        value={selectedState}
+                    >
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select State"/>
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="new">New</SelectItem>
+                            <SelectItem value="under_construction">Under construction</SelectItem>
+                            <SelectItem value="reformated">Reformated</SelectItem>
+                            <SelectItem value="semi_renovated">Semi reformated</SelectItem>
+                            <SelectItem value="second_hand">Second hand</SelectItem>
+                            <SelectItem value="to_renovate">To renovate</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                    </Select>
+
+                    {/* Campo hidden para registrar con react-hook-form */}
+                    <Input type="text" className="hidden" {...register("state")} />
                 </div>
                 <div className="flex flex-col sm:mr-10 mb-2 relative">
                     <label className="mb-2 text-slate-500">

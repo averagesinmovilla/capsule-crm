@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-export const contactSchema = {
+export const contactSchema = z.object({
     first_name: z.string().nonempty({ message: "El nombre no puede estar vacío" }),
     last_name: z.string().nonempty({ message: "Los apellidos no pueden estar vacíos" }),
     email: z.string().email({ message: "Email inválido" }),
@@ -10,14 +10,14 @@ export const contactSchema = {
     mobile: z.string().optional(),
     avatar_url: z.string().optional(),
     birthday: z.string().optional(),
-    contact_medium: z.enum(["email", "phone", "sms", "other"]),
+    contact_medium: z.enum(["email", "phone", "social_media", "other"]),
     language: z.enum(['english', 'spanish', 'french', 'other']).optional(),
     notes: z.string().optional(),
     rgpd: z.string().optional(),
     profession: z.string().optional(),
     company: z.string().optional(),
     gender: z.enum(["male", "female", "other"]),
-};
+});
 
 export const getDefaultValues = (data: Contact) => ({
     first_name: data.first_name || "",
@@ -50,7 +50,7 @@ export type Contact = {
     mobile?: string;
     avatar_url?: string;
     birthday?: string;
-    contact_medium: 'email' | 'phone' | 'sms' | 'other';
+    contact_medium: 'email' | 'phone' | 'social_media' | 'other';
     language?: 'english' | 'spanish' | 'french' | 'other';
     notes?: string;
     rgpd?: string;

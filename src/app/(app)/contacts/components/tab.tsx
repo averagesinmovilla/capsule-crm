@@ -36,15 +36,11 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                     <TabsTrigger value="relations">Relationships</TabsTrigger>
                 </TabsList>
                 <TabsContent value="data">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Personal Information</CardTitle>
-                            <CardDescription>Contact details and personal information.</CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4 h-[calc(100vh-350px)] overflow-auto">
+                    <Card className="border-0 shadow-none">
+                        <CardContent className="space-y-4 h-[calc(100vh-350px)] overflow-auto p-0 gap-4 mt-4">
                             <div className="grid grid-cols-1 gap-4">
                                 {/* Contact Details */}
-                                <div className="p-4 bg-white rounded shadow">
+                                <div className="p-4 border rounded shadow">
                                     <h3 className="font-bold">Contact Details</h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-5 min-h-[80px]">
                                         {renderField('Email', contact.email)}
@@ -58,7 +54,7 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                                 </div>
 
                                 {/* Personal Information */}
-                                <div className="p-4 bg-white rounded shadow">
+                                <div className="p-4 border rounded shadow">
                                     <h3 className="font-bold">Personal Information</h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-5 min-h-[80px]">
                                         {renderField('NIF', contact.nif)}
@@ -69,7 +65,7 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                                 </div>
 
                                 {/* Profession */}
-                                <div className="p-4 bg-white rounded shadow">
+                                <div className="p-4  border rounded shadow">
                                     <h3 className="font-bold">Profession</h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 min-h-[80px]">
                                         {renderField('Profession', contact.profession)}
@@ -79,7 +75,7 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                                 </div>
 
                                 {/* Notes */}
-                                <div className="p-4 bg-white rounded shadow">
+                                <div className="p-4  border rounded shadow">
                                 <h3 className="font-bold">Notes</h3>
                                     <div className="flex flex-wrap min-h-[80px] p-5">
                                         {renderField('', contact.notes)}
@@ -87,7 +83,7 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                                 </div>
 
                                 {/* GDPR */}
-                                <div className="p-4 bg-white rounded shadow">
+                                <div className="p-4  border rounded shadow">
                                     <h3 className="font-bold">RGPD</h3>
                                     <div className="flex flex-wrap min-h-[200px] p-5">
                                         {renderField('', contact.rgpd)}
@@ -98,19 +94,15 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                     </Card>
                 </TabsContent>
                 <TabsContent value="relations">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Relationships</CardTitle>
-                            <CardDescription>People and entities related to this contact.</CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4 h-[calc(100vh-350px)] overflow-auto">
-                            <div className="p-4 bg-white rounded shadow">
+                    <Card className="border-0 shadow-none">
+                        <CardContent className="space-y-4 h-[calc(100vh-350px)] overflow-auto p-0 gap-4 mt-4">
+                            <div className="p-4  rounded shadow">
                                 <span>Related to: Project A</span>
                             </div>
-                            <div className="p-4 bg-white rounded shadow">
+                            <div className="p-4  rounded shadow">
                                 <span>Contact: John Doe</span>
                             </div>
-                            <div className="p-4 bg-white rounded shadow">
+                            <div className="p-4  rounded shadow">
                                 <span>Company: Tech Solutions</span>
                             </div>
                         </CardContent>

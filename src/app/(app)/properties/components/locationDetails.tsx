@@ -17,7 +17,7 @@ const LocationDetails: React.FC<PropertyDetailsProps> = ({ data }) => {
         <div className="flex flex-col">
             <span className="flex items-center">
                 <RiMapPinLine />
-                <span className="text-sm ml-2 font-bold">{direction ?? "-"}</span>
+                <span className="text-lg ml-2 font-bold">{direction ?? "-"}</span>
             </span>
         </div>
     );

@@ -49,7 +49,7 @@ const GalleryPhotos: React.FC<PropertyProps> = ({ property }) => {
                     {numfotos > 0 && (
                     <div className="absolute inset-0 flex items-center justify-center cursor-pointer">
                         <span
-                            className="bg-white bg-opacity-70 text-gray-800 rounded-lg px-4 py-2 text-sm font-medium">
+                            className="bg-opacity-70 text-gray-800 rounded-lg px-4 py-2 text-sm font-medium">
                             +{numfotos} Photos
                         </span>
                     </div>
@@ -62,6 +62,3 @@ const GalleryPhotos: React.FC<PropertyProps> = ({ property }) => {
 };
 
 export default GalleryPhotos;
-
-
-
