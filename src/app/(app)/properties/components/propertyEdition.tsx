@@ -29,7 +29,18 @@ import {useRouter} from "next/navigation";
 import AlertDialog from "@/components/shared/alertDialog";
 import PropertyContactEdit from "@/app/(app)/properties/components/propertyContactEdit";
 import LocationEdition from "@/app/(app)/properties/components/locationEdition";
-import {Contact} from "@/types/contact.types";
+import { MdCloudUpload, MdDelete } from "react-icons/md";
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger
+} from "@/components/ui/sheet";
+import {ContactsTable} from "@/app/(app)/contacts/components/contacts-table/contacts-table";
+import {ImageModal} from "@/app/(app)/properties/components/imageModal";
 
 
 interface PropertyEditionProps {
@@ -45,6 +56,7 @@ const PropertyEdition: React.FC<PropertyEditionProps> = ({ editFunction, data, r
     const { toast } = useToast();
     const router = useRouter();
     const propertyService = new PropertyService();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const methods = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: getDefaultValues(data)
@@ -186,12 +198,12 @@ const PropertyEdition: React.FC<PropertyEditionProps> = ({ editFunction, data, r
                     </div>
                     <div className="flex flex-col w-full gap-6 box-border p-5 h-[calc(100vh-150px)] overflow-y-auto">
                         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-7 md:col-span-1 gap-4">
-                            <div className="md:col-span-5 border p-5 shadow rounded-md">
+                            <div className="md:col-span-5 border p-5 shadow rounded-md relative">
                                 <GalleryPhotos property={data}/>
                                 <Dialog>
                                     <DialogTrigger asChild>
-                                        <Button className="mt-5" variant="outline">
-                                            Upload Photos
+                                        <Button className="absolute top-[30px] left-[37px] z-[1] bg-slate-900 bg-opacity-25 hover:bg-opacity-70 hover:bg-slate-900">
+                                            <MdCloudUpload />
                                         </Button>
                                     </DialogTrigger>
                                     <DialogContent className="sm:max-w-[425px]">
@@ -213,6 +225,24 @@ const PropertyEdition: React.FC<PropertyEditionProps> = ({ editFunction, data, r
                                         </div>
                                     </DialogContent>
                                 </Dialog>
+                                <Sheet open={isModalOpen}  onOpenChange={setIsModalOpen}>
+                                    <SheetTrigger asChild>
+                                        <Button onClick={() => setIsModalOpen(true)} className="absolute top-[30px] left-[90px] z-[1] bg-red-600 bg-opacity-25 hover:bg-opacity-70 hover:bg-red-600 text-white flex items-center space-x-2">
+                                            <MdDelete />
+                                        </Button>
+                                    </SheetTrigger>
+                                    <SheetContent className="modal-sheet-contacts">
+                                        <SheetHeader>
+                                            <SheetTitle>Delete Images</SheetTitle>
+                                        </SheetHeader>
+                                        <ImageModal property={data} rechargeFunctionProperty={rechargeFunctionProperty}/>
+                                        <SheetFooter>
+                                            <SheetClose asChild>
+                                                <Button className="hidden" type="button" variant="destructive">Delete Selected Images</Button>
+                                            </SheetClose>
+                                        </SheetFooter>
+                                    </SheetContent>
+                                </Sheet>
                             </div>
                             <div className="md:col-span-2 flex flex-col justify-between gap-4">
                                 <AgentEdition/>

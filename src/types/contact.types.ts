@@ -1,4 +1,5 @@
 import * as z from "zod";
+import {Property} from "@/types/property.types";
 
 export const contactSchema = z.object({
     first_name: z.string().nonempty({ message: "El nombre no puede estar vacío" }),
@@ -36,6 +37,7 @@ export const getDefaultValues = (data: Contact) => ({
     profession: data.profession || "",
     company: data.company || "",
     gender: data.gender || "other",
+    properties: data.properties || [],
 });
 
 export type Contact = {
@@ -57,6 +59,7 @@ export type Contact = {
     profession?: string;
     company?: string;
     gender: 'male' | 'female' | 'other';
+    properties?:Property[];
 };
 
 export type ApiResponseContact = {

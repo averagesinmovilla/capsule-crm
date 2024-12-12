@@ -6,3 +6,8 @@ export type Image = {
     order: number;
     is_visible: number;
 }
+
+export type ApiResponseImageStatus = {
+    message: string;
+    status: number;
+};

@@ -8,6 +8,7 @@ import { SkeletonCard } from '@/app/(app)/contacts/components/skeleton';
 import ContactView from "@/app/(app)/contacts/components/contactView";
 import ContactEdition from "@/app/(app)/contacts/components/contactEdition";
 import { ContactService } from '@/services/contact.service';
+import {Property} from "@/types/property.types";
 
 const ContactComponent = () => {
     const { id } = useParams();
@@ -21,6 +22,10 @@ const ContactComponent = () => {
         phone: '',
         email: ''
     });
+
+    const handlerRechargeContact = async (contact: Contact) => {
+        setContact(contact);
+    }
 
     useEffect(() => {
         const fetchContact = async () => {
@@ -64,7 +69,7 @@ const ContactComponent = () => {
     return (
         <div className="flex flex-1 w-full h-full">
             {isEditing ? (
-                <ContactEdition editFunction={setIsEditing} data={contact} />
+                <ContactEdition editFunction={setIsEditing} rechargeFunction={handlerRechargeContact} data={contact} />
             ) : (
                 <ContactView editFunction={setIsEditing} data={contact}/>
             )}

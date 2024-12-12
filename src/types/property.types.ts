@@ -68,8 +68,8 @@ export const getDefaultValues = (data: Property) => ({
     status: data.status || "pending",
     contact_id: data.contact_id || 0,
     user_id: data.user_id || 0,
-    contact: data.contact || null,
     image: data.image || [],
+    contact: data.contact || null,
 });
 
 

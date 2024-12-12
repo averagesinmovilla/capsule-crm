@@ -11,7 +11,7 @@ const LocationDetails: React.FC<PropertyDetailsProps> = ({ data }) => {
 
     const array = [data.street, data.street_number, data.door, data.floor, data.city];
     const arrayDirection = array.filter(item => item != null && item !== '');
-    const direction = arrayDirection.join(",");
+    const direction = arrayDirection.join(", ");
 
     return (
         <div className="flex flex-col">

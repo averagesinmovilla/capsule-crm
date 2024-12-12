@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
@@ -16,17 +15,24 @@ import {
     TabsTrigger,
 } from "@/components/ui/tabs";
 import { Contact } from "@/types/contact.types";
+import {useRouter} from "next/navigation";
+import { Button } from "@/components/ui/button"
+import {ChevronRight} from "lucide-react";
+import React from "react";
 
 interface TabContactProps {
     contact: Contact;
 }
 
 const TabContact: React.FC<TabContactProps> = ({ contact }) => {
+    const router = useRouter();
+    const properties = contact.properties ?? [];
     const renderField = (label: string, value: string | number | null | undefined) => (
         <p className="mr-20">
             <span className="font-semibold">{label == "" ? "" : label+":"}</span> {value || '-'}
         </p>
     );
+
 
     return (
         <div className="flex p-5">
@@ -96,14 +102,34 @@ const TabContact: React.FC<TabContactProps> = ({ contact }) => {
                 <TabsContent value="relations">
                     <Card className="border-0 shadow-none">
                         <CardContent className="space-y-4 h-[calc(100vh-350px)] overflow-auto p-0 gap-4 mt-4">
-                            <div className="p-4  rounded shadow">
-                                <span>Related to: Project A</span>
-                            </div>
-                            <div className="p-4  rounded shadow">
-                                <span>Contact: John Doe</span>
-                            </div>
-                            <div className="p-4  rounded shadow">
-                                <span>Company: Tech Solutions</span>
+                            <div className="space-y-4">
+                                {properties.length === 0 ? (
+                                    <div className="text-center text-gray-500 mt-6">
+                                        No relations exist for this contact.
+                                    </div>
+                                ) : (
+                                    properties.map((property) => (
+                                        <div key={property.id} className="border p-4 rounded-lg shadow-sm flex justify-between items-center">
+                                            <div>
+                                                <div>
+                                                    <span className="mb-2 font-bold mr-2">Reference:</span>
+                                                    <span>{property.reference}</span>
+                                                </div>
+                                                <div className="mb-2">
+                                                    <span className="mb-2 font-bold mr-2">Location:</span>
+                                                    <span>{`${property.street}, ${property.street_number}, ${property.city}`}</span>
+                                                </div>
+                                            </div>
+                                            <Button
+                                                onClick={() => router.push(`/properties/${property.id}`)}
+                                                variant="outline" size="icon"
+                                            >
+                                                <ChevronRight/>
+                                            </Button>
+                                        </div>
+                                    ))
+                                )}
+
                             </div>
                         </CardContent>
                     </Card>

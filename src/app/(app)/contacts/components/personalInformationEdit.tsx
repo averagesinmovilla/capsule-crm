@@ -12,13 +12,11 @@ import {
 const PersonalInformationEdition: React.FC = () => {
     const { register, setValue, getValues } = useFormContext();
 
-    const [selectedContactMedium, setSelectedContactMedium] = useState<string | undefined>(getValues("contact_medium"));
     const [selectedLanguage, setSelectedLanguage] = useState<string | undefined>(getValues("language"));
     const [selectedGender, setSelectedGender] = useState<string | undefined>(getValues("gender"));
 
     const handleSelectChange = (name: string, value: string) => {
         setValue(name, value); // Actualiza el valor en React Hook Form
-        if (name === "contact_medium") setSelectedContactMedium(value);
         if (name === "language") setSelectedLanguage(value);
         if (name === "gender") setSelectedGender(value);
     };
@@ -32,30 +30,8 @@ const PersonalInformationEdition: React.FC = () => {
                     <Input type="text" placeholder="NIF" {...register("nif")} />
                 </div>
                 <div className="flex flex-col">
-                    <label className="mb-2 text-slate-500">Avatar URL</label>
-                    <Input type="text" placeholder="Avatar URL" {...register("avatar_url")} />
-                </div>
-                <div className="flex flex-col">
                     <label className="mb-2 text-slate-500">Date of Birth</label>
                     <Input type="date" placeholder="Date of Birth" {...register("birthday")} />
-                </div>
-                <div className="flex flex-col">
-                    <label className="mb-2 text-slate-500">Contact Medium</label>
-                    <Select
-                        onValueChange={(value) => handleSelectChange("contact_medium", value)}
-                        value={selectedContactMedium}
-                    >
-                        <SelectTrigger className="w-full border p-1 rounded">
-                            <SelectValue placeholder="Select Contact Medium" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="other">Other</SelectItem>
-                            <SelectItem value="email">Email</SelectItem>
-                            <SelectItem value="phone">Phone</SelectItem>
-                            <SelectItem value="sms">SMS</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    <input type="hidden" {...register("contact_medium")} />
                 </div>
                 <div className="flex flex-col">
                     <label className="mb-2 text-slate-500">Language</label>

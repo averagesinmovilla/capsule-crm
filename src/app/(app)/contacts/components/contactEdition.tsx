@@ -33,11 +33,12 @@ interface ContactEditionProps {
     editFunction: (isEditing: boolean) => void;
     data: Contact;
     isNew?: boolean;
+    rechargeFunction?: (contactData: Contact) => void;
 }
 
 const formSchema = contactSchema;
 
-const ContactEdition: React.FC<ContactEditionProps> = ({editFunction, data, isNew = false}) => {
+const ContactEdition: React.FC<ContactEditionProps> = ({editFunction, data, isNew = false, rechargeFunction}) => {
     const {toast} = useToast();
     const router = useRouter();
     const contactService = new ContactService();
@@ -70,6 +71,9 @@ const ContactEdition: React.FC<ContactEditionProps> = ({editFunction, data, isNe
             } else {
                 const {contact} = await contactService.update(data.id, updatedContact)
                 router.push(`/contacts/${contact.id}`);
+                if (typeof(rechargeFunction) == "function") {
+                    rechargeFunction(contact);
+                }
             }
 
             toast({

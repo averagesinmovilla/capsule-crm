@@ -6,6 +6,7 @@ import { ApiParamsType } from '@/types/api-params.type';
 import {AxiosRequestConfig, AxiosResponse} from "axios";
 import {FileUploaderResponseType} from "@/types/file-uploader.type";
 import axios from "@/lib/axios";
+import {ApiResponseProperty, Property} from "@/types/property.types";
 
 export type ApiParamsContactType = ApiParamsType & {
     [key: string]: string | number | boolean;
@@ -36,7 +37,7 @@ export class ContactService {
         return data;
     }
 
-    public async save(contact: Omit<Contact, "id">): Promise<ApiResponseContact> {
+    public async save(contact: Omit<Omit<Contact, "id">, "properties">): Promise<ApiResponseContact> {
         const { data } = await HttpService.getInstance().post<ApiResponseContact>(`${ConfigService.apiUrl}/contacts`, contact)
 
         return data;

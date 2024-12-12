@@ -13,7 +13,7 @@ interface PropertyDetailsProps {
 
 const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
 
-    const price = property.sale_price != 0 ? property.sale_price + '€' : (property.rent_price != 0 ? property.rent_price + '€/month' : '');
+    const price = property.sale_price != 0 ? parseFloat(String(property.sale_price))?.toLocaleString('es-ES') + ' €' : (property.rent_price != 0 ? parseFloat(String(property.rent_price))?.toLocaleString('es-ES') + ' €/month' : '');
 
     return (
         <div className="flex flex-col md:col-span-2">
@@ -25,22 +25,22 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
             <LocationDetails data={property}/>
             <div className="flex mt-4 mb-4 text-sm text-slate-500">
                 <div className="flex items-center mr-4 text-lg">
-                    <IoBedOutline className="ml-2 mr-1 text-green-500"/>
+                    <IoBedOutline className="ml-2 mr-1"/>
                     <span>{property.bedrooms} Beds</span>
                 </div>
                 <div className="flex items-center mr-4 text-lg">
-                    <PiBathtubLight className="ml-2 mr-1 text-green-500"/>
-                    <span>{property.bathrooms} Baths</span>
+                    <PiBathtubLight className="ml-2 mr-1"/>
+                    <span>{Number(property.bathrooms) + Number(property.toilets)} Baths</span>
                 </div>
                 <div className="flex items-center mr-4 text-lg">
-                    <BiSolidCarGarage className="ml-2 mr-1 text-green-500"/>
+                    <BiSolidCarGarage className="ml-2 mr-1"/>
                     <span>{property.garage_spaces} Parks</span>
                 </div>
             </div>
             <span className="border border-b-0 mb-6"></span>
             <div className="mb-4">
                 <h2 className="text-lg font-bold">{property.title}</h2>
-                <p className="text-sm mt-2">{property.description}</p>
+                <p className="text-sm mt-2 text-slate-500">{property.description}</p>
             </div>
         </div>
     );

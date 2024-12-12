@@ -47,9 +47,7 @@ const LocationDetails: React.FC = () => {
                         </label>
                         <Input
                             type="text"
-                            className={`border p-1 rounded w-full ${
-                                errors.city ? 'border-red-500' : 'border-gray-300'
-                            } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500`}
+                            className="border p-1 rounded"
                             {...register("city")}
                             onBlur={handleBlur}
                         />

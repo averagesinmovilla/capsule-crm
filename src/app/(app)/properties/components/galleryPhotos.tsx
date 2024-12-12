@@ -29,27 +29,27 @@ const GalleryPhotos: React.FC<PropertyProps> = ({ property }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className={classCarrusel}>
-                <div className="h-[400px]">
+                <div className="h-[450px]">
                     <GallerySwiper property={property}/>
                 </div>
             </div>
             <div className="md:flex flex-col justify-between md:col-span-1 hidden">
                 {arrFotos.length > 1 && (
-                <div className="relative w-full h-[190px] rounded-md">
+                <div className="relative w-full h-[220px] rounded-md">
                     <img className="rounded-md w-full h-full object-cover" alt="Imagen"
                          src={foto1}/>
                     <div className="absolute inset-0 bg-gray-500 bg-opacity-50 rounded-md"></div>
                 </div>
                 )}
                 {arrFotos.length > 2 && (
-                <div className="relative w-full h-[190px] rounded-md">
+                <div className="relative w-full h-[220px] rounded-md">
                     <img className="rounded-md w-full h-full object-cover" alt="Imagen"
                          src={foto2}/>
                     <div className="absolute inset-0 bg-gray-500 bg-opacity-50 rounded-md"></div>
                     {numfotos > 0 && (
                     <div className="absolute inset-0 flex items-center justify-center cursor-pointer">
                         <span
-                            className="bg-opacity-70 text-gray-800 rounded-lg px-4 py-2 text-sm font-medium">
+                            className="bg-white bg-opacity-80 text-gray-800 rounded-lg px-4 py-2 text-sm font-medium">
                             +{numfotos} Photos
                         </span>
                     </div>
