@@ -12,11 +12,6 @@ interface ImageModalProps {
     rechargeFunctionProperty?: (propertyData: Property) => void;
 }
 
-interface ImageModalProps {
-    property: Property;
-    rechargeFunctionProperty?: (propertyData: Property) => void; // Callback para actualizar en el componente padre
-}
-
 export function ImageModal({ property, rechargeFunctionProperty }: ImageModalProps) {
     const [selectedImages, setSelectedImages] = useState<number[]>([]);
     const [images, setImages] = useState<Image[]>(property.image || []);
@@ -75,7 +70,7 @@ export function ImageModal({ property, rechargeFunctionProperty }: ImageModalPro
     };
 
     return (
-        <div className="mt-4">
+        <div className="mt-4 overflow-y-auto">
             <div className="flex flex-wrap gap-4 justify-center">
                 {images.map((image: Image) => (
                     <div

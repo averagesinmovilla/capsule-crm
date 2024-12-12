@@ -231,7 +231,7 @@ const PropertyEdition: React.FC<PropertyEditionProps> = ({ editFunction, data, r
                                             <MdDelete />
                                         </Button>
                                     </SheetTrigger>
-                                    <SheetContent className="modal-sheet-contacts">
+                                    <SheetContent className="modal-sheet-contacts overflow-y-auto">
                                         <SheetHeader>
                                             <SheetTitle>Delete Images</SheetTitle>
                                         </SheetHeader>
